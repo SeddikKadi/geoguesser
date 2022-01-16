@@ -1,0 +1,60 @@
+{
+  "name": "geoguesser",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@googlemaps/js-api-loader": "^1.12.11",
+    "@mui/material": "^5.2.7",
+    "@react-google-maps/api": "^2.7.0",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/hoist-non-react-statics": "3.3.0",
+    "@types/react-redux": "7.0.1",
+    "awesome-streetview": "^1.4.2",
+    "axios": "^0.24.0",
+    "google-map-react": "^2.1.10",
+    "hoist-non-react-statics": "3.3.0",
+    "install": "^0.13.0",
+    "load-google-maps-api": "^2.0.2",
+    "react": "^17.0.2",
+    "react-countdown": "^2.3.2",
+    "react-dom": "^17.0.2",
+    "react-google-maps": "^9.4.5",
+    "react-id-generator": "^3.0.2",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "react-streetview": "^1.1.1",
+    "semantic-ui-ember": "Semantic-Org/Semantic-UI-Ember",
+    "source-map-loader": "^3.0.0",
+    "uuidv4": "^6.2.12",
+    "web-vitals": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

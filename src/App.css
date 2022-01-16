@@ -1,0 +1,203 @@
+
+.App {
+  text-align: center;
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+/* .gm-iv-address,.gm-compass,.gmnoprint{
+  display: none;
+}
+div[style="position: absolute; pointer-events: none; transform: translate(-50%, -50%); z-index: 1000; top: 50%; color: white; font-size: 20px; left: 50%; background-color: rgba(0, 0, 0, 0.3); padding: 5px; border-radius: 3px; text-align: center;"]{
+  display: none;
+} */
+.gm-iv-address{
+  display: none;
+}
+div[style="transform: scale(1);transform-origin: left center;position: absolute;left: 0px;top: 0px;"]{
+  left: -1800 px !important;
+ 
+}
+
+.div[style="position: absolute; pointer-events: none; transform: translate(-50%, -50%); z-index: 1000; top: 50%; color: white; font-size: 20px; left: 50%; background-color: rgba(0, 0, 0, 0.3); padding: 5px; border-radius: 3px; text-align: center;"]{
+  display: none;
+}
+.mapContainer{
+  position: absolute;
+  bottom: 22px;
+  right: 21px;
+  z-index: 10;
+  width: fit-content;
+  height: fit-content;
+  opacity: 0.9;
+}
+div[style="position: absolute; pointer-events: none; transform: translate(-50%, -50%); z-index: 1000; top: 50%; color: white; font-size: 20px; left: 50%; background-color: rgba(0, 0, 0, 0.3); padding: 5px; border-radius: 3px; text-align: center;"]{
+  display: none;
+}
+div[dir="ltr"]{
+  left: -186vh !important;
+}
+div[data-control-height="81"]{
+  left: -185vh !important;
+  
+}
+.map{
+
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+.mapComponent{
+  filter: brightness(180%);
+}
+.back{
+  position: absolute;
+  left: 130px;
+  top: -107px;
+  z-index: 99999999999;
+  height: 45px;
+  width: 45px;
+  opacity: .8;
+}
+.buttonGuess{
+  width: 100%;
+  height: 40px;
+  background-color: #61dafb;
+}
+.nextGame{
+  width: 100%;
+  height: 40px;
+}
+
+.mapContainer:hover{
+  opacity: 1 !important;
+}
+/* div[style="margin: 0px 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"]{
+  display: none;
+} */
+.mapsParent{
+  position: relative;
+}
+
+.mapButton{
+  position: absolute;
+  right: 0px;
+  top: 100%;
+}
+.topPanel{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 300px;
+  height: 80px;
+  z-index: 9999999999;
+  background-color: rgb(88, 215, 226);
+   color: white;
+  -webkit-filter: invert(1);
+  filter: invert(1);
+
+}
+.topPanelElement{
+  
+  display:inline-flex;
+  width: 20%;
+  height: 80px;
+ 
+}
+.extendMap{
+  position: absolute;
+  top: -34px;
+  left: 0px;
+  background-color: white;
+  padding: 3px;
+
+}
+.extendsElements{
+  position: relative;
+  top: 2px;
+}
+div[style="background-color: white; font-weight: 500; font-family: Roboto, sans-serif; padding: 15px 25px; box-sizing: border-box; top: 5px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 5px; left: 50%; max-width: 375px; position: absolute; transform: translateX(-50%); width: calc(100% - 10px); z-index: 1;"]{
+  display: none;
+}
+
+/* 
+.gm-control-active,.gm-fullscreen-control{
+  display: none;
+} */
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Welcome component style */
+
+.welcomeContainer{
+  width: 60%;
+  margin: auto;
+  color: black;
+}
+
+.noteContainer{
+  position: absolute;
+  left: 0px;
+  top: -400px;
+  z-index: 99999999999;
+  
+  font-size: large;
+}
+.ResultScore{
+  display:block;
+  width: fit-content;
+  margin: auto;
+  padding-top:30px; 
+}
+.scoreProgress{
+  display: inline-block;
+}
+.resultDetails{
+  background-color: rgb(150, 126, 126);
+}
+ul[class="ant-pagination ant-table-pagination ant-table-pagination-right"]{
+  display: none;
+}
+
+.gameParameterContainer{
+  display:block;
+  width: fit-content;
+  margin: auto;
+  padding-top: 300px;
+
+}
+.slider,.params,.timeParam{
+  width: 80%;
+  margin: auto;
+}
+.streetViewContainer{
+  height: 100vh;
+  width: 100%;
+}
