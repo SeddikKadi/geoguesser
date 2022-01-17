@@ -9,8 +9,9 @@ const router = require("express").Router();
 router.post("/create",async (req, res) => {
     const newGame = new PlayedGame(req.body.round);
 
-    console.log("round",req.body.round)
+
     let gamePlayed=await PlayedGame.findOne({usergameid:req.body.round.usergameid})
+    console.log("gameplayed",gamePlayed)
 
     if(gamePlayed === null){
         try {
@@ -24,15 +25,14 @@ router.post("/create",async (req, res) => {
         try {
 
             let update=req.body.round;
-
+            console.log("round",update)
             const c =gamePlayed.guessedPoints.length
-
-
 
             if(req.body.id ===c ){
                 gamePlayed.guessedPoints.push(update.guessedPoints)
                 gamePlayed.distance.push(update.distance)
                 gamePlayed.score.push(update.score)
+                gamePlayed.gameId=update.gameId
 
                 PlayedGame.findOneAndUpdate({usergameid:update.usergameid},gamePlayed,function(err) {
                     if (err)

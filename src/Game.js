@@ -298,6 +298,7 @@ function Game() {
            </div>
          </div>
         <div className='streetView' onClick={()=>{!lockedMap && setWidth(400)}}>
+            {console.log("streetviewLocation",location)}
           <StreetViewComponent data={location}  key={restart} />
         </div>
           

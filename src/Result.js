@@ -40,7 +40,8 @@ const Result=(props)=>{
 
 
     useEffect(()=>{
-
+        {
+            console.log("gameId",gameid)}
 
         if(localStorage.getItem("updateGame")===null){
             localStorage.getItem("updateGame","true")
