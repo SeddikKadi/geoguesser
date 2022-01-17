@@ -1,17 +1,21 @@
 const PlayedGame = require("../Models/PlayedGame");
 const Game = require("../Models/Game");
+const Map = require("../Models/Map");
 
 
 const router = require("express").Router();
 
 //CREATE
-
+router.get("/getgamebyid/:usergameid",async (req,res)=>{
+    const userGame = await PlayedGame.findOne({ usergameid: req.params.usergameid })
+    console.log("getgamebyid",userGame)
+    res.send(userGame)
+})
 router.post("/create",async (req, res) => {
     const newGame = new PlayedGame(req.body.round);
 
 
     let gamePlayed=await PlayedGame.findOne({usergameid:req.body.round.usergameid})
-    console.log("gameplayed",gamePlayed)
 
     if(gamePlayed === null){
         try {
@@ -25,7 +29,6 @@ router.post("/create",async (req, res) => {
         try {
 
             let update=req.body.round;
-            console.log("round",update)
             const c =gamePlayed.guessedPoints.length
 
             if(req.body.id ===c ){

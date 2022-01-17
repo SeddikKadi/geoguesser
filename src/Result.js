@@ -4,6 +4,9 @@ import {useLocation, useParams} from 'react-router-dom';
 import {Link} from "react-router-dom"
 import { useId } from "react-id-generator";
 import axios from "axios";
+
+import MobileStepper from '@mui/material/MobileStepper';
+import ProgressBar from "./ProgressBar";
 const apiKey= "AIzaSyCSNmOGeJWpHyL2v2fP5C8TURDCXi1MI1w"
 
 
@@ -12,10 +15,27 @@ const Result=(props)=>{
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyCSNmOGeJWpHyL2v2fP5C8TURDCXi1MI1w",
       });
+    const [gameData,setGameData]=useState("")
       const params=useLocation()
+
      let id=(eval(roundid))
     const [userId] = useId();
 
+
+      const distanceFormater=(distance)=>{
+          distance=Math.floor(distance)
+          if(distance<1000){
+              return ""+distance+"m"
+          }else{
+              return ""+Math.floor(distance/1000)+"km"
+          }
+      }
+    function normalizeScore(min, max,val) {
+        var delta = max - min;
+
+        return (val - min) / delta;
+
+    }
     var rad = function(x) {
         return x * Math.PI / 180;
     };
@@ -33,13 +53,14 @@ const Result=(props)=>{
     };
 
 
-    const [distance,setDistance]=useState(getDistance(params.state.guessedPoint,params.state.gameLocations))
+    const distance=getDistance(params.state.guessedPoint,params.state.gameLocations)
+    const score=Math.floor(5000-normalizeScore(0,950000,Math.trunc(distance)*5000))
 
 
 
 
 
-    useEffect(()=>{
+    useEffect(async ()=>{
         {
             console.log("gameId",gameid)}
 
@@ -59,7 +80,17 @@ const Result=(props)=>{
 
             axios.post(`http://localhost:8082/api/playedgame/create`,{round,id})
         }
+       if(roundid>0){
+           await  axios.get(
+               `http://localhost:8082/api/playedgame/getgamebyid/`+params.state.usergameid
+           ).then((res)=>{
+              console.log("response",res.data)
+               setGameData(res.data)
 
+           }).catch((err)=>{
+               console.log(err)
+           })
+       }
 
 
         return(function clear(){
@@ -69,21 +100,6 @@ const Result=(props)=>{
 
     },[])
 
-
-
-
-/* 
-        let colors = ["red","blue","green"];
-        localStorage.setItem("my_colors", JSON.stringify(colors)); //store colors
-
-        var storedColors = JSON.parse(localStorage.getItem("my_colors")); //get them back
-
-        console.log(storedColors)
-                       */
-
-
-
-    
     const handlePlayAgain=()=>{
       
     }
@@ -171,6 +187,34 @@ const Result=(props)=>{
    
              
           </div>
+            <div className="display-results">
+                <div className="progressPTitle">
+                    <div className="progressData">
+                        <h2>
+                            <span className="scoreProgress">Score : {score}</span>
+                            <span >Distance : {distanceFormater(distance)}</span>
+                        </h2>
+
+                    </div>
+
+                </div>
+                <ProgressBar bgcolor={"#fcba03"} completed={Math.floor((score*100)/5000)} />
+
+                    <table>
+
+                        <tr>
+                            <td>Alfreds Futterkiste</td>
+                            <td>Maria Anders</td>
+                            <td>Germany</td>
+                        </tr>
+                        <tr>
+                            <td>Centro comercial Moctezuma</td>
+                            <td>Francisco Chang</td>
+                            <td>Mexico</td>
+                        </tr>
+                    </table>
+
+            </div>
 
 </div>
             

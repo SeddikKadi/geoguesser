@@ -132,19 +132,6 @@ function Game() {
 
 
   const handleNewGame=async()=>{
-
-
-   
-  /*      await randomStreetView.setParameters({
-            polygon:[polygon]
-       }) */
-    /*   await randomStreetView.getRandomLocations(5).then(
-        (locations)=>{
-                        setLocation({lat:locations[0][0],lng:locations[0][1]})
-                     }
-      ); */
-
-
                    let l=JSON.parse(localStorage.getItem("game"))
 
 
@@ -301,9 +288,6 @@ function Game() {
             {console.log("streetviewLocation",location)}
           <StreetViewComponent data={location}  key={restart} />
         </div>
-          
-
-     
       <div className='mapsParent'>
               <div>
                     <button className="mapButton" onClick={()=>handleClick()} >

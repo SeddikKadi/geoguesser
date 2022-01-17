@@ -177,7 +177,7 @@ div[style="background-color: white; font-weight: 500; font-family: Roboto, sans-
   padding-top:30px; 
 }
 .scoreProgress{
-  display: inline-block;
+  margin-right: 20px;
 }
 .resultDetails{
   background-color: rgb(150, 126, 126);
@@ -200,4 +200,21 @@ ul[class="ant-pagination ant-table-pagination ant-table-pagination-right"]{
 .streetViewContainer{
   height: 100vh;
   width: 100%;
+}
+.progressP{
+  padding-top: 2px;
+}
+.display-results{
+  width: 45%;
+  margin: auto;
+  height: 20px;
+}
+.progressPTitle{
+
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+}
+.progressData{
+  display: inline !important;
 }
