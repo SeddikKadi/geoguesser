@@ -21,7 +21,7 @@ function Game() {
   const [restart,setRestart]=useState(1)
   const [lockedMap,setLockedMap]=useState(false)
   const [zoom,setZoom]=useState(null)
-  const { map,gameid,time,roundid,gamePlayingId } = useParams();
+  const { map,gameid,time,roundid,usergameid } = useParams();
   const [center,setCenter]=useState(null)
   const [mapDetails,setMapDetails]=useState(null)
   const [game,setGame]=useState(null)
@@ -73,13 +73,6 @@ function Game() {
             `http://localhost:8082/api/games/getgame/`+gameid
         ).then((res)=>{
             setGame(res.data);
-
-            /*    let colors = ["red","blue","green"];
-           localStorage.setItem("my_colors", JSON.stringify(colors)); //store colors
-
-           var storedColors = JSON.parse(localStorage.getItem("my_colors")); //get them back
-
-           console.log(storedColors) */
             localStorage.setItem("game",JSON.stringify(res.data[0].locations))
 
             console.log("databaseGame",JSON.parse(localStorage.getItem("game")));
@@ -291,7 +284,7 @@ function Game() {
            <div className="topPanelElement">
              <div>
                 <div><h3>Round</h3></div>
-             <div><h3>{eval(localStorage.getItem("gameIndex"))+1}/5</h3></div>
+             <div><h3>{eval(roundid)+1}/5</h3></div>
              </div>
            </div>
            <div className="topPanelElement">

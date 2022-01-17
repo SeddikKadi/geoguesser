@@ -9,10 +9,9 @@ const router = require("express").Router();
 router.post("/create",async (req, res) => {
     const newGame = new PlayedGame(req.body.round);
 
+    console.log("round",req.body.round)
+    let gamePlayed=await PlayedGame.findOne({usergameid:req.body.round.usergameid})
 
-    let gamePlayed=await PlayedGame.findOne({gameId:req.body.round.gameId})
-
-    console.log("game exists ? : ",gamePlayed)
     if(gamePlayed === null){
         try {
             const savedGamePlayed = await newGame.save();
@@ -21,10 +20,11 @@ router.post("/create",async (req, res) => {
             res.status(500).json(err);
             console.log("error !!!!!!!!!!!!!!",err)
         }
-    } else{
+    } else{//update current game
         try {
 
             let update=req.body.round;
+
             const c =gamePlayed.guessedPoints.length
 
 
@@ -34,7 +34,7 @@ router.post("/create",async (req, res) => {
                 gamePlayed.distance.push(update.distance)
                 gamePlayed.score.push(update.score)
 
-                PlayedGame.findOneAndUpdate({gameId:update.gameId},gamePlayed,function(err) {
+                PlayedGame.findOneAndUpdate({usergameid:update.usergameid},gamePlayed,function(err) {
                     if (err)
                         console.log('error')
                     else

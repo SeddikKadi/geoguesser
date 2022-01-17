@@ -37,15 +37,24 @@ const GameParameters=(props)=>{
     const { map} = useParams();
     const [roundDuration,setRoundDuration]=useState(5)
     const [gameid,setGameid]=useState(null)
+    const [userGameId,setUserGameId]=useState(null)
 
-    console.log("map",map);
 
 
-    console.log("gameParameter",localStorage.getItem("gameId"))
+    console.log("usergameid",localStorage.getItem("usergameid"))
+
+    useEffect(()=>{
+        return function(){
+
+            localStorage.clear()
+            console.log("cleard!!!")
+        }
+    },[])
 
     useEffect(async()=>{
 
 
+        //gat the game
         await axios.get(
             `http://localhost:8082/api/games/count/`+map
         ).then((res)=>{
@@ -59,13 +68,18 @@ const GameParameters=(props)=>{
         })
 
 
-        if(localStorage.getItem("gameId")===null){
+        setUserGameId(localStorage.getItem("usergameid"))
+        if(localStorage.getItem("usergameid")===null){
 
-            localStorage.setItem("gameId",uuid())
+            localStorage.setItem("usergameid",uuid())
+            setUserGameId(localStorage.getItem("usergameid"))
+
+            console.log("usergameid",localStorage.getItem("usergameid"))
 
             let round={
                 map:"map",
-                gameId:localStorage.getItem("gameId") ,
+                gameId:"",
+                usergameid:localStorage.getItem("usergameid") ,
                 userId:"",
                 guessedPoints:[],
                 distance:[],
@@ -76,9 +90,13 @@ const GameParameters=(props)=>{
 
             await axios.post(`http://localhost:8082/api/playedgame/create`,{round,id:0})
         }
-        return (function clear(){
-            localStorage.clear()
-        })
+
+
+
+
+
+
+
     },[])
 
 
@@ -235,15 +253,10 @@ const params=(
 
 
             </Box>
-            {console.log("gameIIIID",gameid)}
 
-            <Link to={`/newgame/${map}/${gameid}/${roundDuration}/${0}/${localStorage.getItem("gameId")}`}  state={{
+            {console.log("usergameid",userGameId)}
 
-
-               gameId:localStorage.getItem("gameId")
-
-
-            }}> <Button variant="contained" >Go</Button></Link>
+            <Link to={`/newgame/${map}/${gameid}/${roundDuration}/${0}/${userGameId}`}> <Button variant="contained" >Go</Button></Link>
 
 
         </div>

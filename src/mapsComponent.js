@@ -14,7 +14,7 @@ const Map = (props) => {
   const [showLocation, setShowLocation]=useState(false)
   const [visible, setVisible] = useState(false);
   const [center,setCenter]=useState({lat:props.center[0],lng:props.center[1]})
-    const { map,gameid,time,roundid,gamePlayingId} = useParams();
+    const { map,gameid,time,roundid,usergameid} = useParams();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCSNmOGeJWpHyL2v2fP5C8TURDCXi1MI1w",
@@ -97,14 +97,17 @@ const Map = (props) => {
       <div  >
           {markerPos && <Link
           to={`/result/${map}/${gameid}/${time}/${eval(roundid)}`}
-          state={{guessedPoint:markerPos,
+          state={{
+
+                 guessedPoint:markerPos,
 
                   gameLocations:props.location,
 
                   center:center,
 
                   zoom:props.zoom,
-                  gameId:gamePlayingId
+
+                  usergameid:usergameid
 
 
                   }}><button className='buttonGuess'>Make a guess</button>

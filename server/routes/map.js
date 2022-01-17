@@ -14,19 +14,18 @@ router.post("/",async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-
 });
-
 
 router.get("/", async(req, res) => {
 const maps = await Map.find()
   res.send(maps)
-
 });
+
 router.get("/:map", async(req, res) => {
   
 
 const maps = await Map.findOne({ name: req.params.map })
+
   res.send(maps)
 
 });

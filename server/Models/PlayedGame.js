@@ -7,6 +7,9 @@ const PlayedGameSchema = new mongoose.Schema({
     gameId: {
         type: String
     },
+    usergameid:{
+        type:String
+    },
     userId:{
         type:String
     },

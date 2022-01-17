@@ -40,11 +40,14 @@ const Result=(props)=>{
 
 
     useEffect(()=>{
+
+
         if(localStorage.getItem("updateGame")===null){
             localStorage.getItem("updateGame","true")
             let round={
                 map:map,
-                gameId:params.state.gameId,
+                gameId:gameid,
+                usergameid:params.state.usergameid,
                 userId,
                 guessedPoints:[params.state.guessedPoint],
                 distance:distance,
@@ -161,7 +164,7 @@ const Result=(props)=>{
                       <Link to={`/`}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>Play again</button></Link>
                   </div>
               ):(
-                  <Link to={`/newgame/${map}/${gameid}/${time}/${id+1}/${params.state.gameId}`}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>Next game</button></Link>
+                  <Link to={`/newgame/${map}/${gameid}/${time}/${id+1}/${params.state.usergameid}`}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>Next game</button></Link>
               )}
 
    

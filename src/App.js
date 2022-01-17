@@ -18,7 +18,7 @@ function App() {
       <BrowserRouter>
           <Routes>
             <Route path="/" exact element={<Welcome />} />
-            <Route path="/newgame/:map/:gameid/:time/:roundid/:gamePlayingId" element={<Game />} />
+            <Route path="/newgame/:map/:gameid/:time/:roundid/:usergameid" element={<Game />} />
               <Route path="/gameparameter/:map/:gameid" element={<GameParameters />} />
             <Route path="/result/:map/:gameid/:time/:roundid" element={<Result />} />
               <Route path="/breakdown" element={<Breakdown />} />
