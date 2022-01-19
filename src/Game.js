@@ -18,7 +18,7 @@ function Game() {
   const googleMapsApiKey = 'AIzaSyCSNmOGeJWpHyL2v2fP5C8TURDCXi1MI1w';
   const [location,setLocation]=useState(null)
   const [showMap,setShowMap]= useState(false);
-  const [width,setWidth]=useState(400)
+  const [width,setWidth]=useState(0.4)
   const [restart,setRestart]=useState(1)
   const [lockedMap,setLockedMap]=useState(false)
   const [zoom,setZoom]=useState(null)
@@ -47,7 +47,6 @@ function Game() {
 
     useEffect(async ()=>{
           fillDataBase();
-
 
     if(localStorage.getItem("gameIndex")===null){
       localStorage.setItem("gameIndex",JSON.stringify(eval(roundid)))
@@ -161,8 +160,8 @@ function Game() {
     const handleClick=()=>{
 
       setShowMap(true)
-      if(width<600){
-        setWidth(width+100)
+      if(width<0.8){
+        setWidth(width+0.2)
        
       }
      
@@ -227,8 +226,8 @@ function Game() {
     }
     const handleExtends=()=>{
       setShowMap(true)
-      if(width>400){
-        setWidth(width-100)
+      if(width>=0.41){
+        setWidth(width-0.2)
       }
     }
     const handleNextGame=()=>{
@@ -262,9 +261,6 @@ function Game() {
            </div>
            <div className="topPanelElement">
              <div>
-
-                 {console.log("globalScore",globalScore)}
-
                 <div><h3>Score</h3></div>
              <div><h3>{globalScore}</h3></div>
              </div>
@@ -285,7 +281,7 @@ function Game() {
              </div>
            </div>
          </div>
-        <div className='streetView' onClick={()=>{!lockedMap && setWidth(400)}}>
+        <div className='streetView' onClick={()=>{!lockedMap && setWidth(0.4)}}>
             {console.log("streetviewLocation",location)}
           <StreetViewComponent data={location}  key={restart} />
         </div>
@@ -302,16 +298,18 @@ function Game() {
                       <div className='noteContainer' >
                      
                       </div>
+                    {console.log("width ratio",width)}
                       <div className="mapContainer" >
-                          <div className="map" onMouseEnter={()=>{!lockedMap && setWidth(600)}} >
+                          <div className="map" onMouseEnter={()=>{/*!lockedMap && setWidth(0.6)*/}} >
                               <Map data={width} NextGameCallback={handleNextGame} callback={callback}  location={location} zoom={zoom} center={center}/>
+
                               <div className='extendMap'>
                                 <span className='extendsElements' onClick={()=>{handleClick()}}>
-                                  {(width===800)?(<LeftCircleOutlined style={{width:"30px",fontSize:"25px",opacity:"0.5"}}/>):
+                                  {(width===0.8)?(<LeftCircleOutlined style={{width:"30px",fontSize:"25px",opacity:"0.5"}}/>):
                                                  (<LeftCircleFilled style={{width:"30px",fontSize:"25px"}}/>)}
                                 </span>
                                 <span className='extendsElements' onClick={()=>{handleExtends()}}>
-                                {(width===400)?(<RightCircleOutlined style={{width:"30px",fontSize:"25px",opacity:"0.5"}}/>):
+                                {(width<0.41)?(<RightCircleOutlined style={{width:"30px",fontSize:"25px",opacity:"0.5"}}/>):
                                                (<RightCircleFilled style={{width:"40px",fontSize:"25px"}}/>)}
                                 </span>
                                 <span className='extendsElements'>
@@ -319,16 +317,18 @@ function Game() {
                                                 (<PushpinOutlined style={{width:"40px",fontSize:"25px",opacity:"0.5"}}  onClick={()=>{setLockedMap(!lockedMap)}}/>):
                                                 (<PushpinFilled style={{width:"40px",fontSize:"25px"}}  onClick={()=>{setLockedMap(!lockedMap)}}/>)}
                                 </span>
+                                  <span className='extendsElements'>
+
+                                    <HomeFilled  style={{width:"33px",fontSize:"22px",opacity:"0.5"}} onClick={()=>handleBack()}/>
+
+
+
+                                </span>
                               </div>
                           </div>
                        
                       </div>
 
-                      <div>
-
-                          <button className='back' onClick={()=>handleBack()}><HomeFilled /></button>
-
-                      </div>
 
                 </div>
             

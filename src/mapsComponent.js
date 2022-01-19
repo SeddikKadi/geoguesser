@@ -29,29 +29,6 @@ const Map = (props) => {
       console.log(props.zoom)
 
   }
-/*   console.log("props.zoom",props.zoom)
-  let z=null;
-
-  (props.zoom===null)?z=zoom[map]:z=props.zoom;
-  let c=null;
-  (props.center===null)?c=center[map]:c=props.center; */
-
-
-  //
-  // const handleGuess=()=>{
-  //   props.callback(markerPos)
-  //
-  //
-  //   setShowLocation(true)
-  // }
-  //
-  // const handleNextGame=()=>{
-  //
-  //   props.NextGameCallback()
-  //   setShowLocation(false);
-  //   setMarkerPos(null)
-  // }
- 
 
   const renderMap = () => (
     <div>
@@ -59,8 +36,8 @@ const Map = (props) => {
 
       <GoogleMap key={isLoaded}
           mapContainerStyle={{
-            height: (width-150)+"px",
-            width: width+"px",
+            height: (width*window.innerHeight)+"px",
+            width: ((width*window.innerHeight)+(window.innerHeight*0.2))+"px",
             margin: "0px",
           }}
           zoom={props.zoom}
