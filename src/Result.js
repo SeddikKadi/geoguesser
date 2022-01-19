@@ -5,7 +5,6 @@ import {Link} from "react-router-dom"
 import { useId } from "react-id-generator";
 import axios from "axios";
 
-import MobileStepper from '@mui/material/MobileStepper';
 import ProgressBar from "./ProgressBar";
 const apiKey= "AIzaSyCSNmOGeJWpHyL2v2fP5C8TURDCXi1MI1w"
 
@@ -15,7 +14,8 @@ const Result=(props)=>{
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: "AIzaSyCSNmOGeJWpHyL2v2fP5C8TURDCXi1MI1w",
       });
-    const [gameData,setGameData]=useState("")
+    const [gameData,setGameData]=useState(null)
+    const [globalScore, setGlobalScore]=useState(null)
       const params=useLocation()
 
      let id=(eval(roundid))
@@ -59,7 +59,15 @@ const Result=(props)=>{
 
 
 
+    const getGlobalScore=(gameData)=>{
 
+        let score=0;
+            gameData.map((element)=>{
+                score+=element;
+            })
+
+        return score;
+    }
     useEffect(async ()=>{
         {
             console.log("gameId",gameid)}
@@ -73,24 +81,27 @@ const Result=(props)=>{
                 userId,
                 guessedPoints:[params.state.guessedPoint],
                 distance:distance,
-                score:"5000",
+                score:score,
                 timeRound:time
             }
-            console.log("round",round)
 
-            axios.post(`http://localhost:8082/api/playedgame/create`,{round,id})
+            await axios.post(`http://localhost:8082/api/playedgame/create`,{round,id}).then(()=>{
+                 axios.get(
+                    `http://localhost:8082/api/playedgame/getgamebyid/`+params.state.usergameid
+                ).then((res)=>{
+                    console.log("response",res.data)
+                    setGameData(res.data)
+
+                     setGlobalScore(getGlobalScore(res.data.score))
+
+                }).catch((err)=>{
+                    console.log(err)
+                })
+            })
         }
-       if(roundid>0){
-           await  axios.get(
-               `http://localhost:8082/api/playedgame/getgamebyid/`+params.state.usergameid
-           ).then((res)=>{
-              console.log("response",res.data)
-               setGameData(res.data)
 
-           }).catch((err)=>{
-               console.log(err)
-           })
-       }
+
+
 
 
         return(function clear(){
@@ -101,7 +112,7 @@ const Result=(props)=>{
     },[])
 
     const handlePlayAgain=()=>{
-      
+      console.log("globalScore",globalScore)
     }
 
 
@@ -109,8 +120,6 @@ const Result=(props)=>{
         <div>
         
           <div className='mapComponent' >
-              {console.log(distance)}
-             
           <GoogleMap key={apiKey}
               mapContainerStyle={{
                 height:"600px",
@@ -177,11 +186,11 @@ const Result=(props)=>{
           <div  >
               {(id>=4)?(
                   <div>
-                      <Link to={`/breakdown`}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>breakdown</button></Link>
+                      {/*<Link to={`/breakdown`}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>breakdown</button></Link>*/}
                       <Link to={`/`}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>Play again</button></Link>
                   </div>
               ):(
-                  <Link to={`/newgame/${map}/${gameid}/${time}/${id+1}/${params.state.usergameid}`}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>Next game</button></Link>
+                  <Link to={`/newgame/${map}/${gameid}/${time}/${id+1}/${params.state.usergameid}` } state={{globalScore:globalScore}}><button className='buttonGuess' onClick={()=>handlePlayAgain()}>Next game</button></Link>
               )}
 
    
@@ -199,20 +208,30 @@ const Result=(props)=>{
 
                 </div>
                 <ProgressBar bgcolor={"#fcba03"} completed={Math.floor((score*100)/5000)} />
+                    <div className="resumScore">
+                        <h4>
+                        <table>
+                            <tr>
+                                <td  width="20%"><strong>Round </strong> </td>
+                                <td width="20%"> <strong>Distance </strong></td>
+                                <td width="20%"><strong>Temps </strong></td>
+                                <td width="20%"><strong>Score </strong></td>
+                            </tr>
+                            {console.log("map test",gameData)}
+                            {(gameData!==null) ? gameData.distance.map((element, index)=>(
+                                <tr key={index}>
+                                    <td >{index+1}</td>
+                                    <td>{distanceFormater(gameData.distance[index])}</td>
+                                    <td>{gameData.timeRound} min</td>
+                                    <td>{gameData.score[index]}</td>
+                                </tr>
+                            ) ):""}
 
-                    <table>
 
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                            <td>Germany</td>
-                        </tr>
-                        <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
-                            <td>Mexico</td>
-                        </tr>
-                    </table>
+                        </table>
+                        </h4>
+                    </div>
+
 
             </div>
 

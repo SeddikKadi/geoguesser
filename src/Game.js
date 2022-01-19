@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';//test
+
 import Map from "./mapsComponent"
 import randomStreetView from "./randomStreetView/RandomStreetView"
 import StreetViewComponent from './streetView';
@@ -26,6 +27,7 @@ function Game() {
   const [mapDetails,setMapDetails]=useState(null)
   const [game,setGame]=useState(null)
     const params=useParams();
+  const globalScore=useLocation().state.globalScore
 
 
 
@@ -81,10 +83,6 @@ function Game() {
             console.log(err)
         })
     }
-
-
-      
-
 
           await axios.get(
           `http://localhost:8082/api/maps/`+map
@@ -264,8 +262,11 @@ function Game() {
            </div>
            <div className="topPanelElement">
              <div>
+
+                 {console.log("globalScore",globalScore)}
+
                 <div><h3>Score</h3></div>
-             <div><h3>{localStorage.getItem("score")}</h3></div>
+             <div><h3>{globalScore}</h3></div>
              </div>
            </div>
            <div className="topPanelElement">

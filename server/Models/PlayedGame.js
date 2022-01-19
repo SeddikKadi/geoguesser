@@ -20,7 +20,7 @@ const PlayedGameSchema = new mongoose.Schema({
         type:Array
     },
     score:{
-        type:[String]
+        type:[Number]
     },
     timeRound:{
         type:String

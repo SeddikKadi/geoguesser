@@ -256,7 +256,7 @@ const params=(
 
             {console.log("usergameid",userGameId)}
 
-            <Link to={`/newgame/${map}/${gameid}/${roundDuration}/${0}/${userGameId}`}> <Button variant="contained" >Go</Button></Link>
+            <Link to={`/newgame/${map}/${gameid}/${roundDuration}/${0}/${userGameId}`} state={{globalScore:0}}> <Button variant="contained" >Go</Button></Link>
 
 
         </div>

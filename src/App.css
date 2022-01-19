@@ -14,7 +14,7 @@ div[style="position: absolute; pointer-events: none; transform: translate(-50%, 
   display: none;
 }
 div[style="transform: scale(1);transform-origin: left center;position: absolute;left: 0px;top: 0px;"]{
-  left: -1800 px !important;
+  /*left: -1800 px !important;*/
  
 }
 
@@ -217,4 +217,8 @@ ul[class="ant-pagination ant-table-pagination ant-table-pagination-right"]{
 }
 .progressData{
   display: inline !important;
+}
+.resumScore{
+  width: fit-content;
+  margin: auto;
 }
