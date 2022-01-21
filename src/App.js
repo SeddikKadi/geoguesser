@@ -10,19 +10,36 @@ import axios from 'axios';
 import Result from './Result';
 import GameParameters from "./gameParameters";
 import Breakdown from "./Breakdown"
+import {Navigate} from "react-router-dom";
 
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom"
+import Login from "./Login";
+import Signin from "./Signin";
+import ProtectedRoutes from "./ProtectedRoute";
+import Intro from "./intro";
+import Button from '@mui/material/Button';
+
 function App() {
+
   return (
     <div>
       <BrowserRouter>
           <Routes>
-            <Route path="/" exact element={<Welcome />} />
-            <Route path="/newgame/:map/:gameid/:time/:roundid/:usergameid" element={<Game />} />
-              <Route path="/gameparameter/:map/:gameid" element={<GameParameters />} />
-            <Route path="/result/:map/:gameid/:time/:roundid" element={<Result />} />
-              <Route path="/breakdown" element={<Breakdown />} />
 
+              <Route element={<ProtectedRoutes/>}>
+                  <Route path="/" exact element={<Welcome />} />
+                  <Route path="/newgame/:map/:gameid/:time/:roundid/:usergameid" element={<Game />} />
+                  <Route path="/gameparameter/:map" element={<GameParameters />} />
+                  <Route path="/result/:map/:gameid/:time/:roundid" element={<Result />} />
+                  <Route path="/breakdown" element={<Breakdown />} />
+             </Route>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signin" element={<Signin />} />
+              <Route path="/intro" element={<Intro />} />
+              <Route
+                  path="*"
+                  element={<Navigate to="/" />}
+              />
           </Routes>
       </BrowserRouter>
     </div>

@@ -6,6 +6,7 @@ dotenv.config();
 const gameRoute=require("./routes/game");
 const mapRouter=require("./routes/map")
 const playedRouter=require("./routes/playedGameSchema")
+const authenticationRouter=require("./routes/authentication")
 
 const app = express();
 
@@ -22,6 +23,7 @@ mongoose.connect(process.env.MONGO_URL)
   app.use("/api/games",gameRoute)
   app.use("/api/maps",mapRouter)
   app.use("/api/playedgame",playedRouter)
+  app.use("/api/authentication",authenticationRouter)
 
 const port = process.env.PORT || 8082;
 

@@ -181,6 +181,7 @@ const Result=(props)=>{
 
             
             </GoogleMap>
+              {  console.log("token",sessionStorage.getItem("token"))}
 
           </div>
           <div  >

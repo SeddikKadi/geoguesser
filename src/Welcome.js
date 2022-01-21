@@ -1,21 +1,35 @@
 import React, { useEffect,useState } from "react";
-import {Link} from "react-router-dom"
-import { data,image } from "./data";
 import axios from "axios"
+import Button from "@mui/material/Button";
+import { useNavigate } from 'react-router-dom'
+import {Link} from "react-router-dom"
 
 
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 
+import MapCard from "./MapCard";
 const  Welcome=(props)=>{
-
+    const navigate = useNavigate()
 
 const style = {  padding: "8px" };
-const keys = Object.keys(data);
+
 const  [mapDetails,setMapDetails]=useState(null)
 const [game,setGame]=useState(null)
 const [selectedMap,setSelectedMap]=useState(null)
 
-//map ne se met pas a jour apres le changement de partie
+
+    const Item = styled(Paper)(({ theme }) => ({
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
+
     useEffect(async()=>{
             await axios.get(
                     `http://localhost:8082/api/maps`
@@ -35,58 +49,57 @@ const [selectedMap,setSelectedMap]=useState(null)
 
 
     )
-
-   /*  const handleNewGame=async()=>{
-
-       await axios.get(
-            `http://localhost:8082/api/games/count`
-            ).then((res)=>{
-              setGame(res.data._id)
-          
-        
-            }).catch((err)=>{
-            console.log(err)
-        })
-  
-        
-    } */
-    const handleSelectMap=async(map)=>{
-    
-
-    }
-    //to={`/newgame/${element.name}/${game}`}
 return (
-    <div className="welcomeContainer">
-       <div className="navbar">
-           <span> My account</span>
+    <div>
+        <div className="navbar">
+            <div className="logoutButton">
+                {(sessionStorage.getItem("token")!==null)?(
+                    <Button  variant="contained" onClick={()=>{
+                        console.log("token",sessionStorage.getItem("token"))
+                        sessionStorage.clear()
 
-                 <div gutter={[16, 24]}>
-                    {mapDetails && mapDetails.map((element)=>(
-                        <div className="gutter-row" span={8} key={element.name} onMouseEnter={()=>{handleSelectMap(element.name)}}>
-                            <div style={style}>
-                                <div
-                                        hoverable
-                                        style={{ width: 300 }}
-                                        cover={<img alt="example" width="300px" src={element.image} />}
-                                >
+                        navigate("/intro")
+                    }}>Logout</Button>
+                ):(
+                    <Button  variant="contained" onClick={()=>{
+                        navigate("/login")
+                    }}>Login</Button>
+                )}
 
 
-                                        description= {<Link to={`/gameparameter/${element.name}/${game}`}>
-                                            <button type="primary" shape="round" size="middle" >
-                                               Play
-                                            </button>
-                                         </Link> }
-                                     
-                                </div>
-                            </div>
-                        </div>
-                    )
-                 )}
-                 </div>
-       
-           
-       </div>
+
+            </div>
+
+        </div>
+
+
+        <div className="welcomeContainer">
+
+            <Box sx={{ width: '100%' }}>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+
+                {mapDetails && mapDetails.map((element,index)=>{
+
+                        return(
+                            <Grid item xs={2} sm={4} md={4} key={index}>
+                            <MapCard data={element} key={index} />
+                            </Grid>
+                        )
+                }
+                )}
+
+
+
+                </Grid>
+            </Box>
+
+
+
+        </div>
+
     </div>
+
 )
 }
 export default Welcome;
