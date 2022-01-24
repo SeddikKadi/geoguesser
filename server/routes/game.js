@@ -33,22 +33,23 @@ router.get("/count/:map", async(req, res) => {
     try{
 let count=0;
     const c = await Game.count({})
-   
-        count = Math.floor(Math.random() * c)
-    
 
-    let game=null;
-    while(game===null){
-       game=await Game.findOne({map:req.params.map})
-    .skip(count).exec()
-        count = Math.floor(Math.random() * c)
-    console.log("try")
-    }
+        const games = await Game.find({map:req.params.map})
+        count = Math.floor(Math.random() * games.length)
 
-    console.log("found game",game)
-
-
-     res.send(game);
+    res.send(games[count])
+    // let game=null;
+    // while(game===null){
+    //    game=await Game.findOne({map:req.params.map})
+    // .skip(count).exec()
+    //     count = Math.floor(Math.random() * c)
+    // console.log("try")
+    // }
+    //
+    // console.log("found game",game)
+    //
+    //
+    //  res.send(game);
     }catch(err){
       res.status(500).json(err)
     }

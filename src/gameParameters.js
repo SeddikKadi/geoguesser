@@ -39,10 +39,6 @@ const GameParameters=(props)=>{
     const [gameid,setGameid]=useState(null)
     const [userGameId,setUserGameId]=useState(null)
 
-
-
-    console.log("usergameid",localStorage.getItem("usergameid"))
-
     useEffect(()=>{
         return function(){
 
@@ -58,9 +54,12 @@ const GameParameters=(props)=>{
         await axios.get(
             `http://localhost:8082/api/games/count/`+map
         ).then((res)=>{
+
+            console.log("games_id",res.data._id)
+
+
             setGameid(res.data._id)
 
-            console.log("selected game",gameid)
 
 
         }).catch((err)=>{
@@ -254,7 +253,6 @@ const params=(
 
             </Box>
 
-            {console.log("usergameid",userGameId)}
 
             <Link to={`/newgame/${map}/${gameid}/${roundDuration}/${0}/${userGameId}`} state={{globalScore:0}}> <Button variant="contained" >Go</Button></Link>
 
