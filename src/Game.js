@@ -74,6 +74,9 @@ function Game() {
             `http://localhost:8082/api/games/getgame/`+gameid
         ).then((res)=>{
             setGame(res.data);
+
+
+
             localStorage.setItem("game",JSON.stringify(res.data[0].locations))
 
             console.log("databaseGame",JSON.parse(localStorage.getItem("game")));
@@ -91,11 +94,12 @@ function Game() {
               localStorage.setItem("zoom",res.data.zoom)
               setZoom(res.data.zoom)
               setCenter(res.data.center)
+              console.log("res.data.polygon",res.data.polygon)
              
               handleNewGame();
               randomStreetView.setParameters({
-                polygon:[res.data.polygon]
-           })
+                 polygon:res.data.polygon
+                })
               
           }).catch((err)=>{
           console.log(err)
@@ -147,7 +151,6 @@ function Game() {
 
     const fillDataBase= ()=>{
 
-      console.log("filled !!!")
       randomStreetView.getRandomLocations(5).then(
           async(locations)=>{
 
@@ -158,29 +161,19 @@ function Game() {
     }
 
     const handleClick=()=>{
-
-      setShowMap(true)
+      setShowMap(true);
       if(width<0.8){
         setWidth(width+0.2)
-       
       }
-     
     }
 
     const callback=(data)=>{
         //store guessed point
         localStorage.setItem("guessedPoint",JSON.stringify([data.lat,data.lng]))
-
-
         //get distance guessed point and solution point
-
         let  guess=getDistance(location,data);
-
-
        //calculate score for the round
         let z=Math.trunc(normalize(guess,0,20000000,1,21))
-
-
         //zoom ??
         //setZoom(21-z)
 

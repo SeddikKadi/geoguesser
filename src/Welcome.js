@@ -20,6 +20,7 @@ const style = {  padding: "8px" };
 const  [mapDetails,setMapDetails]=useState(null)
 const [game,setGame]=useState(null)
 const [selectedMap,setSelectedMap]=useState(null)
+    const [dataSet,setDataSet]=useState(null)
 
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -39,11 +40,15 @@ const [selectedMap,setSelectedMap]=useState(null)
                     }).catch((err)=>{
                     console.log(err)
                 })
-                return ()=>{
-                    localStorage.clear();
-                    console.log("welcome cleanedup!!")
-                }
+
+
+
+            return ()=>{
+                localStorage.clear();
+                console.log("welcome cleanedup!!")
+            }
     }
+
 
     ,[]
 
@@ -51,6 +56,7 @@ const [selectedMap,setSelectedMap]=useState(null)
     )
 return (
     <div>
+        {console.log("response",dataSet)}
         <div className="navbar">
             <div className="logoutButton">
                 {(sessionStorage.getItem("token")!==null)?(

@@ -17,6 +17,7 @@ import Login from "./Login";
 import Signin from "./Signin";
 import ProtectedRoutes from "./ProtectedRoute";
 import Intro from "./intro";
+import AddMap from "./AddMap"
 import Button from '@mui/material/Button';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signin" element={<Signin />} />
               <Route path="/intro" element={<Intro />} />
+              <Route path="/addmap" exact element={<AddMap/>} />
               <Route
                   path="*"
                   element={<Navigate to="/" />}

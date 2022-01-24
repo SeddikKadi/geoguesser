@@ -59,10 +59,6 @@ const Login=(props)=>{
             password: data.get('password'),
         });
     };
-    const test=(response)=>{
-        console.log(response)
-    }
-
     const theme = createTheme();
 
 
